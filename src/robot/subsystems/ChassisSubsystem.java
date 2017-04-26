@@ -43,7 +43,9 @@ public class ChassisSubsystem extends T_Subsystem {
 		armTopSolenoid = new Solenoid(RobotMap.ARM_TOP_SOLENOID);
 		armBottomSolenoid = new Solenoid(RobotMap.ARM_BOTTOM_SOLENOID);
 
-		// rightMotor.setInverted(true);
+		
+		 rightMotor.setInverted(true);
+		 leftMotor.setInverted(true);
 
 	}
 
@@ -71,35 +73,35 @@ public class ChassisSubsystem extends T_Subsystem {
 	}
 
 	public void openLeftFlap() { 
-		leftFlapSolenoid.set(Value.kForward);
-	}
-
-	public void closeLeftFlap() {
 		leftFlapSolenoid.set(Value.kReverse);
 	}
 
-	public void openRightFlap() {
-		rightFlapSolenoid.set(true);
+	public void closeLeftFlap() {
+		leftFlapSolenoid.set(Value.kForward);
 	}
 
-	public void closeRightFlap() {
+	public void openRightFlap() {
 		rightFlapSolenoid.set(false);
 	}
 
-	public void openTopArm() {
-		armTopSolenoid.set(true);
+	public void closeRightFlap() {
+		rightFlapSolenoid.set(true);
 	}
 
-	public void closeTopArm() {
+	public void openTopArm() {
 		armTopSolenoid.set(false);
 	}
 
+	public void closeTopArm() {
+		armTopSolenoid.set(true);
+	}
+
 	public void openBottomArm() {
-		armBottomSolenoid.set(true);
+		armBottomSolenoid.set(false);
 	}
 
 	public void closeBottomArm() {
-		armBottomSolenoid.set(false);
+		armBottomSolenoid.set(true);
 	}
 
 	/* ****************************************************************************

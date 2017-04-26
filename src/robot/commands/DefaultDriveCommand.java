@@ -1,7 +1,6 @@
 
 package robot.commands;
 
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.Robot;
@@ -33,52 +32,46 @@ public class DefaultDriveCommand extends Command {
 	protected void execute() {
 
 		
+		// Left side flap
 		if (Robot.oi.getLeftSideFlap()) {
 			Robot.chassisSubsystem.openLeftFlap();
 		} else {
 			Robot.chassisSubsystem.closeLeftFlap();
 		}
 		
+		// Right side flap
 		if (Robot.oi.getRightSideFlap()) {
 			Robot.chassisSubsystem.openRightFlap();
 		} else {
 			Robot.chassisSubsystem.closeRightFlap();
 		}
 		
+		// Hold the ball
 		if (Robot.oi.getHoldBall()) {
 			Robot.chassisSubsystem.openTopArm();
 		} else {
 			Robot.chassisSubsystem.closeTopArm();
 		}
 		
+		// Button arm
 		if(Robot.oi.getButtonArm()) {
 			Robot.chassisSubsystem.openBottomArm();
 		} else {
 			Robot.chassisSubsystem.closeBottomArm();
 		}
 		
+		// Robot arm motors
 		double armMotorSpeed = Robot.oi.getArmMotor();
 		
 		if (Math.abs(armMotorSpeed) <= 0.2) {
 			armMotorSpeed = 0;
 		}
-
-		double armSpeed = 0.0;
-		if (armMotorSpeed == 0.0) {
-			armSpeed = 0;
-		} else {
-			if (armMotorSpeed > 0) {
-				armSpeed = armMotorSpeed;
-			} else {
-				armSpeed = -armMotorSpeed;
-			}
-		}
 		
-		Robot.chassisSubsystem.setArmMotorSpeeds(armSpeed);
+		SmartDashboard.putNumber("Arm Speed", armMotorSpeed);
+		Robot.chassisSubsystem.setArmMotorSpeeds(armMotorSpeed);
 		
 		
-		
-		
+		// Drive train
 		double speed = Robot.oi.getSpeed();
 		if (Math.abs(speed) <= .02) {
 			speed = 0;
@@ -120,9 +113,13 @@ public class DefaultDriveCommand extends Command {
 					leftSpeed = (1.0 - turn) * speed;
 					rightSpeed = speed;
 				}
+
 			}
 		}
 
+		// Move the motors at half the speed because the robot is old.... like really really old....
+		leftSpeed *= 0.5;
+		rightSpeed *= 0.5;
 
 		SmartDashboard.putNumber("Robot Speed", (leftSpeed + rightSpeed) / 2);
 

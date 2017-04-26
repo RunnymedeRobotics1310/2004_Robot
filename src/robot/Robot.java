@@ -56,7 +56,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		Robot.chassisSubsystem.closeTopArm();
+		Robot.chassisSubsystem.closeBottomArm();
+		Robot.chassisSubsystem.closeRightFlap();
+		Robot.chassisSubsystem.closeLeftFlap();
 	}
 
 	@Override
